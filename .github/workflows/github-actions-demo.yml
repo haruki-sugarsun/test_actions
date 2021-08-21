@@ -24,3 +24,5 @@ jobs:
           ocaml-version: 4.12.0
       - name: Setup Ruby, JRuby and TruffleRuby
         uses: ruby/setup-ruby@v1.81.0
+        with:
+          ruby-version: 3.0.2
