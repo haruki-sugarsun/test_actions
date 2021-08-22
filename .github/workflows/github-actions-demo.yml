@@ -36,4 +36,4 @@ jobs:
       # CHECK 
       - name: List files in the repository
         run: |
-          ls -lha ${{ github.workspace }}
+          ls -lha ${{ github.workspace }} ~/.opam
