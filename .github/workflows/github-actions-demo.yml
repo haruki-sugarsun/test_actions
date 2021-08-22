@@ -16,11 +16,13 @@ jobs:
       # CACHE CONTROL
       - name: Cache
         uses: actions/cache@v2.1.6
+        env:
+          cache-name: cache-opam
         with:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/.opam
           # An explicit key for restoring and saving the cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }} # -${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('Makefile') }}
       # SETUP
       - name: Set up OCaml
         # You may pin to the exact commit or the version.
