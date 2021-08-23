@@ -13,6 +13,12 @@ jobs:
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      # CHECK submodule and update
+      - run: pwd
+      - run: git status
+      - run: git submodule update
+
       # CACHE CONTROL
       - name: Cache
         uses: actions/cache@v2.1.6
@@ -45,8 +51,6 @@ jobs:
       - run: gem install jekyll bundler
 
       # OPERATIONS
-      - run: git status
-      - run: git submodule update
       - run: |
           ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
       # - run: |
