@@ -20,6 +20,10 @@ jobs:
       - run: pwd
       - run: git status
       - run: git submodule update
+      - name: List files in the repository (before)
+        run: |
+          ls -lha ~/ ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net
+
 
       # CACHE CONTROL
       - name: OPAM Cache
@@ -56,13 +60,13 @@ jobs:
       # OPERATIONS
       - run: |
           ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
-      - run: bundle
-        working-directory: ${{ github.workspace }}/text.sickhack.net
-      - run: bundle exec jekyll build
+      - run: |
+          bundle
+          bundle exec jekyll build
         working-directory: ${{ github.workspace }}/text.sickhack.net
 
 
       # CHECK 
-      - name: List files in the repository
+      - name: List files in the repository (after)
         run: |
           ls -lha ~/ ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net
