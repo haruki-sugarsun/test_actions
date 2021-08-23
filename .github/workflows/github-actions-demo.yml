@@ -22,8 +22,7 @@ jobs:
       - run: git submodule update
       - name: List files in the repository (before)
         run: |
-          ls -lha ~/ ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net
-
+          ls -lha ~/ ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net || true
 
       # CACHE CONTROL
       - name: OPAM Cache
