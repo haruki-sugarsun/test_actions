@@ -22,7 +22,7 @@ jobs:
       - run: git submodule update
 
       # CACHE CONTROL
-      - name: Cache
+      - name: OPAM Cache
         uses: actions/cache@v2.1.6
         env:
           cache-name: cache-opam
@@ -30,11 +30,12 @@ jobs:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/.opam
           # An explicit key for restoring and saving the cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Makefile') }}
-      - uses: actions/cache@v2
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('.cachemark', '**/Makefile') }}
+      - name: Ruby Cache
+        uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-gems-${{ hashFiles('.cachemark', '**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
       # SETUP
@@ -55,6 +56,8 @@ jobs:
       # OPERATIONS
       - run: |
           ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
+      - run: bundle
+        working-directory: ${{ github.workspace }}/text.sickhack.net
       - run: bundle exec jekyll build
         working-directory: ${{ github.workspace }}/text.sickhack.net
 
