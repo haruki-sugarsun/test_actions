@@ -48,8 +48,10 @@ jobs:
       - run: git status
       - run: git submodule update
       - run: |
-          cd text.sickhack.net
-          bundle exec jekyll build
+          ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
+      # - run: |
+      #     cd text.sickhack.net
+      #     bundle exec jekyll build
 
       # CHECK 
       - name: List files in the repository
