@@ -62,4 +62,4 @@ jobs:
       # CHECK 
       - name: List files in the repository
         run: |
-          ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
+          ls -lha ~/ ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net
