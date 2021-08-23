@@ -55,9 +55,9 @@ jobs:
       # OPERATIONS
       - run: |
           ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
-      # - run: |
-      #     cd text.sickhack.net
-      #     bundle exec jekyll build
+      - run: bundle exec jekyll build
+        working-directory: ${{ github.workspace }}/text.sickhack.net
+
 
       # CHECK 
       - name: List files in the repository
