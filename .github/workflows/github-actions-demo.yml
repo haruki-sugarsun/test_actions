@@ -46,7 +46,7 @@ jobs:
 
       # OPERATIONS
       - run: git status
-      - run: git submodules update
+      - run: git submodule update
       - run: |
           cd text.sickhack.net
           bundle exec jekyll build
