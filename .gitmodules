@@ -1,0 +1,3 @@
+[submodule "text.sickhack.net"]
+	path = text.sickhack.net
+	url = git@github.com:haruki-sugarsun/text.sickhack.net.git

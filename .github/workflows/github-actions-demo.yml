@@ -22,7 +22,7 @@ jobs:
           # A list of files, directories, and wildcard patterns to cache and restore
           path: ~/.opam
           # An explicit key for restoring and saving the cache
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('Makefile') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Makefile') }}
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -41,9 +41,17 @@ jobs:
       - name: Setup Ruby, JRuby and TruffleRuby
         uses: ruby/setup-ruby@v1.81.0
         with:
-          ruby-version: 3.0.2
+          ruby-version: 2.7.4
       - run: gem install jekyll bundler
+
+      # OPERATIONS
+      - run: git status
+      - run: git submodules update
+      - run: |
+          cd text.sickhack.net
+          bundle exec jekyll build
+
       # CHECK 
       - name: List files in the repository
         run: |
-          ls -lha ${{ github.workspace }} ~/.opam
+          ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
