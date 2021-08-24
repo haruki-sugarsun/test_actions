@@ -49,6 +49,14 @@ jobs:
           ruby-version: 2.7.4
           working-directory: ${{ github.workspace }}/text.sickhack.net
           bundler-cache: true
+
+      # SSH testing
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: true
+
+          
       - run: gem install jekyll bundler
 
       # OPERATIONS
@@ -64,9 +72,4 @@ jobs:
       - name: List files in the repository (after)
         run: |
           ls -lha ~/ ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net
-          
-      # SSH testing
-      # - name: Setup tmate session
-      #   uses: mxschmitt/action-tmate@v3
-      #   with:
-      #     limit-access-to-actor: true
+
