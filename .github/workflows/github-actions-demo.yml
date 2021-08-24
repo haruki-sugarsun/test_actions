@@ -47,12 +47,13 @@ jobs:
         uses: ruby/setup-ruby@v1.81.0
         with:
           ruby-version: 2.7.4
+          working-directory: ${{ github.workspace }}/text.sickhack.net
           bundler-cache: true
       - run: gem install jekyll bundler
 
       # OPERATIONS
       - run: |
-          ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
+          ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net
       - run: |
           bundle
           bundle exec jekyll build
