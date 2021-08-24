@@ -34,13 +34,6 @@ jobs:
           path: ~/.opam
           # An explicit key for restoring and saving the cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('.cachemark', '**/Makefile') }}
-      - name: Ruby Cache
-        uses: actions/cache@v2
-        with:
-          path: '**/vendor/cache'
-          key: ${{ runner.os }}-gems-${{ hashFiles('.cachemark', '**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
       # SETUP
       - name: Set up OCaml
         # You may pin to the exact commit or the version.
@@ -54,13 +47,14 @@ jobs:
         uses: ruby/setup-ruby@v1.81.0
         with:
           ruby-version: 2.7.4
+          bundler-cache: true
       - run: gem install jekyll bundler
 
       # OPERATIONS
       - run: |
           ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
       - run: |
-          bundle install --path vendor/bundle
+          bundle
           bundle exec jekyll build
         working-directory: ${{ github.workspace }}/text.sickhack.net
 
