@@ -1,5 +1,5 @@
 name: GitHub Actions Demo
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
       - name: Ruby Cache
         uses: actions/cache@v2
         with:
-          path: vendor/bundle
+          path: '**/vendor/cache'
           key: ${{ runner.os }}-gems-${{ hashFiles('.cachemark', '**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
@@ -60,7 +60,7 @@ jobs:
       - run: |
           ls -lha ${{ github.workspace }} ~/.opam ${{ github.workspace }}/text.sickhack.net 
       - run: |
-          bundle
+          bundle install --path vendor/bundle
           bundle exec jekyll build
         working-directory: ${{ github.workspace }}/text.sickhack.net
 
